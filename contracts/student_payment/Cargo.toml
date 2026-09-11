@@ -8,10 +8,10 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-soroban-sdk = "21.6.0"
+soroban-sdk = "21.7.7"
 
 [dev-dependencies]
-soroban-sdk = { version = "21.6.0", features = ["testutils"] }
+soroban-sdk = { version = "21.7.7", features = ["testutils"] }
 
 [profile.release]
 opt-level = "z"
@@ -21,7 +21,3 @@ strip = "symbols"
 debug-assertions = false
 panic = "abort"
 codegen-units = 1
-
-[patch.crates-io]
-ethnum = { git = "https://github.com/nathanb/ethnum-rs", tag = "v1.5.3" }
-

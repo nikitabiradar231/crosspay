@@ -1,5 +1,5 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, contracttype, Symbol, Address, Env, String, Vector, symbol_short};
+use soroban_sdk::{contract, contractimpl, contracttype, Address, Env, String, Vec, symbol_short};
 
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -64,19 +64,19 @@ impl StudentPaymentContract {
 
         // Store request ID in student's request list
         let student_key = DataKey::UserRequests(student.clone());
-        let mut student_reqs: Vector<u64> = env.storage().instance().get(&student_key).unwrap_or(Vector::new(&env));
+        let mut student_reqs: Vec<u64> = env.storage().instance().get(&student_key).unwrap_or(Vec::new(&env));
         student_reqs.push_back(count);
         env.storage().instance().set(&student_key, &student_reqs);
 
         // Store request ID in sponsor's request list
         let sponsor_key = DataKey::UserRequests(sponsor.clone());
-        let mut sponsor_reqs: Vector<u64> = env.storage().instance().get(&sponsor_key).unwrap_or(Vector::new(&env));
+        let mut sponsor_reqs: Vec<u64> = env.storage().instance().get(&sponsor_key).unwrap_or(Vec::new(&env));
         sponsor_reqs.push_back(count);
         env.storage().instance().set(&sponsor_key, &sponsor_reqs);
 
         // Publish event
         env.events().publish(
-            (symbol_short!("req_created"), student, sponsor),
+            (symbol_short!("created"), student, sponsor),
             count,
         );
 
@@ -105,7 +105,7 @@ impl StudentPaymentContract {
         env.storage().instance().set(&req_key, &request);
 
         env.events().publish(
-            (symbol_short!("req_paid"), sponsor, request.student),
+            (symbol_short!("paid"), sponsor, request.student),
             request_id,
         );
 

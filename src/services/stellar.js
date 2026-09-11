@@ -11,7 +11,9 @@ import {
 // Stellar Horizon Testnet Server URL
 export const HORIZON_TESTNET_URL = "https://horizon-testnet.stellar.org";
 export const STELLAR_EXPERT_TESTNET_URL = "https://stellar.expert/explorer/testnet/tx";
-export const SOROBAN_CONTRACT_ADDRESS = import.meta.env?.VITE_SOROBAN_CONTRACT_ADDRESS || "";
+export const SOROBAN_CONTRACT_ADDRESS =
+  import.meta.env?.VITE_SOROBAN_CONTRACT_ADDRESS ||
+  "CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS";
 
 // Initialize Horizon Server for Testnet
 export const horizonServer = new Horizon.Server(HORIZON_TESTNET_URL);
