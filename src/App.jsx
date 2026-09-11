@@ -23,13 +23,15 @@ import {
   sendXlmPayment,
   fundAccountWithFriendbot,
   getEstimatedNetworkFee,
+  fetchAccountTransactions,
 } from "./services/stellar";
 
 import {
   getPaymentRequests,
   createPaymentRequest,
   markRequestPaid,
-  SAMPLE_PROFILES,
+  getUserProfile,
+  saveUserProfile,
 } from "./services/contract";
 
 import { getXlmExchangeRates } from "./services/exchange";
@@ -54,8 +56,8 @@ export default function App() {
   const [rates, setRates] = useState({ USD: 0.115, INR: 9.6 });
   const [isFallbackRates, setIsFallbackRates] = useState(false);
 
-  // User Onboarding & Profiles
-  const [currentProfile, setCurrentProfile] = useState(SAMPLE_PROFILES[0]);
+  // User Profile & Real Data
+  const [currentProfile, setCurrentProfile] = useState(null);
   const [requests, setRequests] = useState([]);
   const [history, setHistory] = useState([]);
 
@@ -73,13 +75,18 @@ export default function App() {
   const [statusMessage, setStatusMessage] = useState("");
   const [txResult, setTxResult] = useState(null);
 
-  // Mount logic: check freighter, load exchange rates & requests
+  // Mount logic: check freighter, load profile, exchange rates & requests
   useEffect(() => {
     async function init() {
       trackEvent("page_visit", { page: "home" });
 
       const installed = await isFreighterAvailable();
       setIsFreighterInstalled(installed);
+
+      const profile = getUserProfile();
+      if (profile) {
+        setCurrentProfile(profile);
+      }
 
       fetchRates();
       loadRequests();
@@ -102,16 +109,20 @@ export default function App() {
     setRequests(data);
   };
 
-  const fetchBalance = async (pubKey) => {
+  const fetchBalanceAndHistory = async (pubKey) => {
     if (!pubKey) return;
     setIsLoadingBalance(true);
     try {
       const res = await getXlmBalance(pubKey);
       setBalance(res.balance);
       setIsAccountFunded(res.exists);
+
+      // Fetch real account transactions directly from Stellar Horizon
+      const realHistory = await fetchAccountTransactions(pubKey);
+      setHistory(realHistory);
     } catch (err) {
-      logAppError(err, "FetchBalance");
-      console.error("Balance fetch error:", err);
+      logAppError(err, "FetchBalanceAndHistory");
+      console.error("Balance/History fetch error:", err);
     } finally {
       setIsLoadingBalance(false);
     }
@@ -128,9 +139,8 @@ export default function App() {
       setWalletAddress(pubKey);
       trackEvent("wallet_connected", { address: pubKey });
 
-      await fetchBalance(pubKey);
+      await fetchBalanceAndHistory(pubKey);
 
-      // Auto-open onboarding if no profile set, else go to dashboard
       if (!currentProfile) {
         setIsOnboardingOpen(true);
       } else {
@@ -162,7 +172,7 @@ export default function App() {
 
     try {
       await fundAccountWithFriendbot(walletAddress);
-      await fetchBalance(walletAddress);
+      await fetchBalanceAndHistory(walletAddress);
       trackEvent("friendbot_funded", { address: walletAddress });
       setTxResult({
         success: true,
@@ -197,7 +207,7 @@ export default function App() {
         amount: newReq.amount,
         recipient: newReq.purpose,
         hash: "Payment Request Registered",
-        message: "Payment request successfully posted!",
+        message: "Payment request successfully created and saved!",
       });
     } catch (err) {
       logAppError(err, "CreatePaymentRequest");
@@ -230,8 +240,8 @@ export default function App() {
       setPendingTxDetails({
         requestId: null,
         studentName: "Direct Student Payout",
-        recipientAddress: "GCX67J298H3KFL493029485720194857201948572019485720194K9L",
-        amount: "100",
+        recipientAddress: "",
+        amount: "10",
         purpose: "Direct Student Support",
       });
       setIsConfirmModalOpen(true);
@@ -268,7 +278,6 @@ export default function App() {
 
       trackEvent("payment_successful", { hash: result.hash, amount: details.amount });
 
-      // Mark payment request as Paid if linked to an ID
       if (details.requestId) {
         markRequestPaid(details.requestId, result.hash);
         loadRequests();
@@ -284,21 +293,10 @@ export default function App() {
       };
 
       setTxResult(successResult);
-
-      setHistory((prev) => [
-        {
-          amount: details.amount.toString(),
-          recipient: details.recipientAddress,
-          purpose: details.purpose,
-          hash: result.hash,
-          success: true,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        },
-        ...prev,
-      ]);
-
       setIsConfirmModalOpen(false);
-      await fetchBalance(walletAddress);
+
+      // Re-fetch balance & real payments from Horizon
+      await fetchBalanceAndHistory(walletAddress);
     } catch (err) {
       console.error("Payment execution failed:", err);
       logAppError(err, "PaymentExecution");
@@ -311,18 +309,6 @@ export default function App() {
         error: err.message || "Transaction failed to process on Stellar Testnet.",
         rawError: err,
       });
-
-      setHistory((prev) => [
-        {
-          amount: details.amount.toString(),
-          recipient: details.recipientAddress,
-          purpose: details.purpose,
-          hash: null,
-          success: false,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        },
-        ...prev,
-      ]);
     } finally {
       setIsSubmitting(false);
       setStatusMessage("");
@@ -331,6 +317,7 @@ export default function App() {
 
   const handleSaveProfile = (profile) => {
     setCurrentProfile(profile);
+    saveUserProfile(profile);
     trackEvent("onboarding_completed", { role: profile.role, name: profile.name });
     if (walletAddress) {
       setActiveTab("dashboard");
@@ -388,7 +375,7 @@ export default function App() {
               balance={balance}
               isLoadingBalance={isLoadingBalance}
               isAccountFunded={isAccountFunded}
-              onRefreshBalance={() => fetchBalance(walletAddress)}
+              onRefreshBalance={() => fetchBalanceAndHistory(walletAddress)}
               onDisconnect={handleDisconnectWallet}
               onFundWithFriendbot={handleFundFriendbot}
               isFunding={isFunding}
@@ -413,7 +400,7 @@ export default function App() {
                 walletAddress={walletAddress}
                 balance={balance}
                 isLoadingBalance={isLoadingBalance}
-                onRefreshBalance={() => fetchBalance(walletAddress)}
+                onRefreshBalance={() => fetchBalanceAndHistory(walletAddress)}
                 requests={requests}
                 onRequestPaymentClick={() => setIsRequestModalOpen(true)}
                 onOpenOnboarding={() => setIsOnboardingOpen(true)}

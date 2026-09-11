@@ -29,7 +29,7 @@ export default function LandingPage({ onGetStarted, onConnectWallet, isWalletCon
             </button>
           )}
           <button className="btn-secondary" onClick={onGetStarted}>
-            Explore Demo Profiles
+            Get Started
           </button>
         </div>
       </section>

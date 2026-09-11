@@ -3,7 +3,7 @@
 A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub designed to help international students receive cross-border tuition, accommodation, and living payments from parents, sponsors, or foundations worldwide with 3-second settlement and near-zero fees.
 
 🚀 **Live Deployment**: [https://simple-payment-dapp-woad.vercel.app](https://simple-payment-dapp-woad.vercel.app/)  
-📜 **Soroban Smart Contract**: `CCSTUDENTPAYMENTHUBTESTNET000000000000000000000000000001`  
+📜 **Soroban Smart Contract**: Configured via `VITE_SOROBAN_CONTRACT_ADDRESS`  
 🌐 **Network**: Stellar Testnet (`https://horizon-testnet.stellar.org`)
 
 ---
@@ -22,7 +22,7 @@ International students face severe financial hurdles when studying abroad:
 The **Cross-Border Student Payment Hub** leverages the **Stellar Blockchain** and **Soroban Smart Contracts** to solve cross-border education payments:
 - ⚡ **3–5 Second Settlement**: Direct peer-to-peer transfers over Stellar Horizon Testnet.
 - 💸 **Near-Zero Network Fees**: Transaction costs under **$0.00001 per payment** (100 stroops base fee).
-- 🔒 **Purpose-Bound Payment Requests**: Students create verified on-chain requests tagged for *Tuition, Accommodation, Books, Travel, Living Expenses, or Emergency*.
+- 🔒 **Purpose-Bound Payment Requests**: Students create verified requests tagged for *Tuition, Accommodation, Books, Travel, Living Expenses, or Emergency*.
 - 📊 **Real-Time Exchange Rates & Transparent Cost Breakdown**: Pre-flight cost breakdown displaying exact XLM, USD ($), and INR (₹) rates before wallet signature.
 - 🤝 **Dual Student & Sponsor Workflows**: Specialized dashboards for students to request funds and sponsors to review and fulfill requests in one click.
 
@@ -30,16 +30,16 @@ The **Cross-Border Student Payment Hub** leverages the **Stellar Blockchain** an
 
 ## ✨ Core Features
 
-1. **Fintech Landing Page**: startup hero section detailing value proposition, instant settlement benefits, and wallet connection prompts.
+1. **Fintech Landing Page**: Hero section detailing value proposition, instant settlement benefits, and wallet connection prompts.
 2. **Freighter Wallet Integration**: Connect and sign natively with Freighter Extension without ever storing private keys.
-3. **User Onboarding**: Role-based selection (Student vs. Sponsor/Parent) with pre-populated demo profiles supporting 10+ real-user testing scenarios.
+3. **User Onboarding**: Role-based selection (Student vs. Sponsor/Parent) collecting actual student and sponsor details.
 4. **Student Dashboard**: Live XLM balance, Total Received counters, active payment request manager, and "Request Payment" creation modal.
 5. **Sponsor Dashboard**: Linked student inbox, Total Sent metrics, one-click "Pay Request" execution, and direct payment tools.
 6. **Payment Request System**: Request creation with custom amount, purpose tags, note messages, and sponsor address routing.
 7. **Pre-Flight Cost Breakdown**: Complete transaction breakdown showing payment amount, base network fee (0.00001 XLM), total deduction, purpose, and destination address.
 8. **Live Exchange Rate Engine**: Real-time XLM conversion to USD ($) and INR (₹) powered by CoinGecko API with offline fallback.
-9. **Transaction Explorer & History**: Searchable and filterable transaction history with direct links to Stellar Expert Explorer.
-10. **Product Telemetry & Analytics**: In-app event telemetry tracking user actions (wallet connect, request created, payment success/failed).
+9. **Transaction Explorer & History**: Real-time Stellar Horizon transaction history with direct links to Stellar Expert Explorer.
+10. **Product Telemetry & Analytics**: In-app event telemetry tracking real user actions (wallet connect, request created, payment success/failed).
 11. **Error Tracking & System Health**: Real-time error log collector capturing RPC errors, wallet rejections, and runtime exceptions.
 12. **User Feedback System**: 5-star rating scale and feedback submission modal.
 
@@ -90,10 +90,9 @@ pub fn get_request(env: Env, request_id: u64) -> PaymentRequest;
 pub fn get_request_count(env: Env) -> u64;
 ```
 
-### Smart Contract Deployment Info
-- **Contract Name**: `student_payment`
+### Smart Contract Build & Test
+- **Contract Location**: `contracts/student_payment/`
 - **Network**: Stellar Testnet
-- **Contract Address**: `CCSTUDENTPAYMENTHUBTESTNET000000000000000000000000000001`
 - **Cargo Build & Test**: `cd contracts/student_payment && cargo test`
 
 ---
@@ -197,8 +196,8 @@ The UI is built with a responsive mobile-first CSS architecture:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/nikitabiradar231/SimplePayment.git
-   cd SimplePayment
+   git clone https://github.com/nikitabiradar231/crosspay.git
+   cd crosspay
    ```
 2. **Install dependencies**:
    ```bash
@@ -221,7 +220,7 @@ Copy `.env.example` to `.env`:
 ```env
 VITE_STELLAR_NETWORK=TESTNET
 VITE_HORIZON_URL=https://horizon-testnet.stellar.org
-VITE_SOROBAN_CONTRACT_ADDRESS=CCSTUDENTPAYMENTHUBTESTNET000000000000000000000000000001
+VITE_SOROBAN_CONTRACT_ADDRESS=
 ```
 
 ---
@@ -236,53 +235,12 @@ The repository includes a GitHub Actions workflow `.github/workflows/ci.yml` tha
 
 ---
 
-## 👥 10+ User Interaction Proof & Demo Profiles
+## 👥 Real User Evidence & Submission Placeholders
 
-The onboarding modal includes a **Quick Demo Switcher** featuring 10 real sample student and sponsor profiles:
-1. **Rahul Sharma** (Stanford University)
-2. **Aisha Patel** (University of Toronto)
-3. **Carlos Gomez** (Imperial College London)
-4. **Mei Lin** (TU Munich)
-5. **David Okafor** (University of Melbourne)
-6. **Vijay Sharma** (Sponsor / Parent - India)
-7. **Zahra Patel** (Sponsor / Parent - Kenya)
-8. **Global Student Fund Inc.** (Sponsor NGO - USA)
-9. **Hans Mueller** (Guardian - Germany)
-10. **Elena Gomez** (Sister - Mexico)
-
-This allows reviewers to simulate 10+ wallet interaction scenarios effortlessly.
-
----
-
-## 📸 Screenshots Guide
-
-1. **Landing Page**: Startup hero section and value proposition features.
-2. **Wallet Connection**: Connected Freighter account and live testnet balance.
-3. **User Onboarding**: Role selector (Student vs Sponsor) and profile creation.
-4. **Student Dashboard**: Request payment manager and total received metrics.
-5. **Sponsor Dashboard**: Pending requests inbox and pay request triggers.
-6. **Payment Request Form**: Student payment request creation with purpose tags.
-7. **Pre-Flight Fee Breakdown**: Transparent transaction details and fee breakdown.
-8. **Successful Transaction**: Confirmed Stellar transaction hash with explorer link.
-9. **Transaction History**: Filterable history list.
-10. **Mobile View**: Fully responsive UI on mobile viewport.
-11. **Telemetry & Monitoring**: In-app analytics drawer and error log collector.
-12. **Feedback System**: 5-star rating scale and feedback modal.
-
----
-
-## 🎥 Recommended Demo Video Flow
-
-1. Open landing page and click **Connect Freighter Wallet**.
-2. Complete onboarding as **Student** (e.g. Rahul Sharma).
-3. Open **Student Dashboard** and click **Request New Payment** (e.g. 500 XLM for Tuition).
-4. Switch role to **Sponsor** (e.g. Vijay Sharma) using the nav profile switcher.
-5. View pending request in **Sponsor Dashboard** inbox.
-6. Click **Pay Request** to review pre-flight transaction fee breakdown.
-7. Confirm payment via **Freighter Wallet popup**.
-8. View transaction confirmation toast and click **Stellar Explorer** link.
-9. Switch back to **Student Dashboard** to verify updated balance and request status marked **Paid**.
-10. Open **Telemetry & Error Log** drawer to show tracked events.
+- **10 Real User Evidence**: [ADD REAL 10 USER EVIDENCE]
+- **Real User Feedback Summary**: [ADD REAL FEEDBACK SUMMARY]
+- **Demo Video Link**: [ADD REAL DEMO VIDEO LINK]
+- **Final Screenshots**: [ADD REAL SCREENSHOTS]
 
 ---
 

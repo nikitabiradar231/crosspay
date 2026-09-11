@@ -11,7 +11,7 @@ import {
 // Stellar Horizon Testnet Server URL
 export const HORIZON_TESTNET_URL = "https://horizon-testnet.stellar.org";
 export const STELLAR_EXPERT_TESTNET_URL = "https://stellar.expert/explorer/testnet/tx";
-export const SOROBAN_CONTRACT_ADDRESS = "CCSTUDENTPAYMENTHUBTESTNET000000000000000000000000000001";
+export const SOROBAN_CONTRACT_ADDRESS = import.meta.env?.VITE_SOROBAN_CONTRACT_ADDRESS || "";
 
 // Initialize Horizon Server for Testnet
 export const horizonServer = new Horizon.Server(HORIZON_TESTNET_URL);
@@ -59,6 +59,38 @@ export async function getXlmBalance(publicKey) {
     throw new Error(
       error.message || "Failed to fetch wallet balance from Stellar Testnet."
     );
+  }
+}
+
+/**
+ * Fetches real payment transaction history directly from Stellar Testnet Horizon.
+ * @param {string} publicKey
+ * @returns {Promise<Array>}
+ */
+export async function fetchAccountTransactions(publicKey) {
+  if (!isValidStellarAddress(publicKey)) return [];
+  try {
+    const response = await horizonServer
+      .payments()
+      .forAccount(publicKey)
+      .order("desc")
+      .limit(20)
+      .call();
+
+    return response.records.map((record) => ({
+      id: record.id,
+      hash: record.transaction_hash,
+      sender: record.from || record.source_account || "",
+      recipient: record.to || record.destination || publicKey,
+      amount: record.amount || "0",
+      asset: record.asset_type === "native" ? "XLM" : record.asset_code || "XLM",
+      timestamp: record.created_at ? new Date(record.created_at).toLocaleString() : new Date().toLocaleString(),
+      success: record.transaction_successful !== false,
+      purpose: record.type === "payment" ? "Payment" : record.type,
+    }));
+  } catch (err) {
+    console.warn("Could not fetch payments from Horizon:", err);
+    return [];
   }
 }
 

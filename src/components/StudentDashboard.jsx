@@ -1,5 +1,5 @@
 import React from "react";
-import { GraduationCap, PlusCircle, ArrowDownLeft, Clock, CheckCircle2, Wallet, RefreshCw, Send } from "lucide-react";
+import { GraduationCap, PlusCircle, ArrowDownLeft, Clock, CheckCircle2, Wallet, Send } from "lucide-react";
 import { convertXlmToFiat } from "../services/exchange";
 
 export default function StudentDashboard({
@@ -7,7 +7,6 @@ export default function StudentDashboard({
   walletAddress,
   balance,
   isLoadingBalance,
-  onRefreshBalance,
   requests = [],
   onRequestPaymentClick,
   onOpenOnboarding,
@@ -35,13 +34,13 @@ export default function StudentDashboard({
             <div className="role-tag">Student Dashboard</div>
             <h2 className="heading-font">{profile?.name || "International Student"}</h2>
             <p className="subtext">
-              {profile?.university || "University"} • {profile?.homeCountry || "Home"} ➔ {profile?.destCountry || "Destination"}
+              {profile?.university || "University Not Specified"} • {profile?.homeCountry || "Home Country"} ➔ {profile?.destCountry || "Destination"}
             </p>
           </div>
         </div>
 
         <button className="btn-secondary" onClick={onOpenOnboarding}>
-          Edit Profile / Switch Demo
+          Edit Profile
         </button>
       </div>
 
@@ -98,9 +97,10 @@ export default function StudentDashboard({
         {studentRequests.length === 0 ? (
           <div className="empty-state text-center py-8">
             <Send size={36} className="text-muted mb-2" />
-            <p>No payment requests created yet.</p>
-            <button className="btn-secondary mt-3" onClick={onRequestPaymentClick}>
-              Create Tuition / Living Request
+            <p className="font-semibold text-muted">No payment requests created yet.</p>
+            <p className="text-dim text-xs mt-1 mb-4">Create your first tuition, accommodation, or living allowance request above.</p>
+            <button className="btn-secondary" onClick={onRequestPaymentClick}>
+              Create Payment Request
             </button>
           </div>
         ) : (
@@ -113,7 +113,7 @@ export default function StudentDashboard({
                   <th>Fiat Value</th>
                   <th>Status</th>
                   <th>Created Date</th>
-                  <th>Actions</th>
+                  <th>Explorer Link</th>
                 </tr>
               </thead>
               <tbody>
@@ -142,7 +142,7 @@ export default function StudentDashboard({
                         {new Date(req.createdAt).toLocaleDateString()}
                       </td>
                       <td>
-                        {req.txHash && (
+                        {req.txHash ? (
                           <a
                             href={`https://stellar.expert/explorer/testnet/tx/${req.txHash}`}
                             target="_blank"
@@ -151,6 +151,8 @@ export default function StudentDashboard({
                           >
                             Explorer ↗
                           </a>
+                        ) : (
+                          <span className="text-dim text-xs">-</span>
                         )}
                       </td>
                     </tr>

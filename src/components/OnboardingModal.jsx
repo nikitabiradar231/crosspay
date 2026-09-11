@@ -1,62 +1,48 @@
-import React, { useState } from "react";
-import { GraduationCap, HeartHandshake, User, Globe, Building2, Check, Users } from "lucide-react";
-import { SAMPLE_PROFILES } from "../services/contract";
+import React, { useState, useEffect } from "react";
+import { GraduationCap, HeartHandshake, User, Globe, Building2, Check } from "lucide-react";
 
 export default function OnboardingModal({ isOpen, onClose, onSaveProfile, currentProfile }) {
-  const [role, setRole] = useState(currentProfile?.role || "student");
-  const [name, setName] = useState(currentProfile?.name || "");
-  const [country, setCountry] = useState(currentProfile?.homeCountry || "India");
-  const [university, setUniversity] = useState(currentProfile?.university || "Stanford University");
-  const [destCountry, setDestCountry] = useState(currentProfile?.destCountry || "USA");
-  const [relationship, setRelationship] = useState(currentProfile?.relationship || "Parent");
+  const [role, setRole] = useState("student");
+  const [name, setName] = useState("");
+  const [country, setCountry] = useState("");
+  const [university, setUniversity] = useState("");
+  const [destCountry, setDestCountry] = useState("");
+  const [relationship, setRelationship] = useState("Parent");
+
+  useEffect(() => {
+    if (currentProfile) {
+      setRole(currentProfile.role || "student");
+      setName(currentProfile.name || "");
+      setCountry(currentProfile.homeCountry || "");
+      setUniversity(currentProfile.university || "");
+      setDestCountry(currentProfile.destCountry || "");
+      setRelationship(currentProfile.relationship || "Parent");
+    }
+  }, [currentProfile, isOpen]);
 
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const profile = {
-      id: `usr-${Date.now()}`,
+      id: currentProfile?.id || `usr-${Date.now()}`,
       role,
-      name: name || (role === "student" ? "International Student" : "Sponsor Parent"),
-      homeCountry: country,
+      name: name.trim() || (role === "student" ? "International Student" : "Sponsor Parent"),
+      homeCountry: country.trim() || "Not Specified",
       ...(role === "student"
-        ? { university, destCountry }
+        ? { university: university.trim() || "Institution Not Specified", destCountry: destCountry.trim() || "Not Specified" }
         : { relationship }),
     };
     onSaveProfile(profile);
     onClose();
   };
 
-  const handleSelectSample = (sample) => {
-    onSaveProfile(sample);
-    onClose();
-  };
-
   return (
     <div className="modal-overlay">
-      <div className="glass-card modal-content" style={{ maxWidth: "560px" }}>
+      <div className="glass-card modal-content" style={{ maxWidth: "520px" }}>
         <div className="modal-header">
-          <h2 className="heading-font">Complete User Onboarding</h2>
+          <h2 className="heading-font">User Onboarding Profile</h2>
           <button className="close-btn" onClick={onClose}>&times;</button>
-        </div>
-
-        {/* Quick Demo Switcher */}
-        <div className="sample-switch-box mb-4">
-          <div className="sample-title">
-            <Users size={16} /> Quick Select Demo Profile (Supports 10+ Users)
-          </div>
-          <div className="sample-tags">
-            {SAMPLE_PROFILES.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                className={`sample-chip ${currentProfile?.name === p.name ? "active" : ""}`}
-                onClick={() => handleSelectSample(p)}
-              >
-                {p.role === "student" ? "🎓" : "🤝"} {p.name}
-              </button>
-            ))}
-          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="onboarding-form">
@@ -90,7 +76,7 @@ export default function OnboardingModal({ isOpen, onClose, onSaveProfile, curren
             <input
               type="text"
               className="form-input"
-              placeholder="e.g. Rahul Sharma"
+              placeholder="e.g. Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required

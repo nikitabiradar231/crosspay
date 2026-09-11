@@ -1,5 +1,5 @@
 import React from "react";
-import { HeartHandshake, Send, Clock, CheckCircle2, Wallet, ArrowUpRight, ShieldCheck, Zap } from "lucide-react";
+import { HeartHandshake, Send, Clock, CheckCircle2, Wallet, ArrowUpRight, Zap } from "lucide-react";
 import { convertXlmToFiat } from "../services/exchange";
 
 export default function SponsorDashboard({
@@ -31,14 +31,14 @@ export default function SponsorDashboard({
             <div className="role-tag sponsor-tag">Sponsor / Parent Dashboard</div>
             <h2 className="heading-font">{profile?.name || "Student Supporter"}</h2>
             <p className="subtext">
-              {profile?.relationship || "Parent"} • {profile?.homeCountry || "Sponsor Region"}
+              {profile?.relationship || "Sponsor"} • {profile?.homeCountry || "Home Region"}
             </p>
           </div>
         </div>
 
         <div className="banner-actions">
           <button className="btn-secondary" onClick={onOpenOnboarding}>
-            Switch Profile
+            Edit Profile
           </button>
         </div>
       </div>
@@ -96,7 +96,8 @@ export default function SponsorDashboard({
         {pendingRequests.length === 0 ? (
           <div className="glass-card empty-state text-center py-8" style={{ gridColumn: "1 / -1" }}>
             <CheckCircle2 size={36} className="text-emerald mb-2" />
-            <p>All student payment requests have been settled!</p>
+            <p className="font-semibold text-muted">No pending student payment requests.</p>
+            <p className="text-dim text-xs mt-1">When students create payment requests, they will appear here for review and settlement.</p>
           </div>
         ) : (
           pendingRequests.map((req) => {
