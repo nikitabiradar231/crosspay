@@ -2,7 +2,7 @@
 
 A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub designed to help international students receive cross-border tuition, accommodation, and living payments from parents, sponsors, or foundations worldwide with 3-second settlement and near-zero fees.
 
-🚀 **Live Vercel Deployment**: [https://simple-payment-dapp-woad.vercel.app](https://simple-payment-dapp-woad.vercel.app/)  
+🚀 **Live Vercel Deployment**: [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/)  
 📜 **Soroban Smart Contract**: `CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`  
 🌐 **Network**: Stellar Testnet (`https://horizon-testnet.stellar.org` & `https://soroban-testnet.stellar.org`)
 
@@ -242,7 +242,7 @@ The repository includes a GitHub Actions workflow `.github/workflows/ci.yml` tha
 
 ## 📋 Manual Submission Checklist
 
-- [x] **Live Vercel Link**: [https://simple-payment-dapp-woad.vercel.app](https://simple-payment-dapp-woad.vercel.app/)
+- [x] **Live Vercel Link**: [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/)
 - [x] **Public GitHub Repo**: [https://github.com/nikitabiradar231/crosspay](https://github.com/nikitabiradar231/crosspay)
 - [x] **Soroban Contract Address**: `CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`
 - [ ] **10 Real User Hashes**: *(To be inserted after collecting user transactions)*
