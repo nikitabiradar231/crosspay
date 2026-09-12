@@ -6,17 +6,25 @@ import {
   Asset,
   StrKey,
   Memo,
+  BASE_FEE,
+  rpc,
+  Contract,
+  Address,
+  nativeToScVal,
+  scValToNative,
 } from "@stellar/stellar-sdk";
 
-// Stellar Horizon Testnet Server URL
+// Stellar Horizon & Soroban Testnet URLs
 export const HORIZON_TESTNET_URL = "https://horizon-testnet.stellar.org";
+export const SOROBAN_RPC_URL = "https://soroban-testnet.stellar.org";
 export const STELLAR_EXPERT_TESTNET_URL = "https://stellar.expert/explorer/testnet/tx";
 export const SOROBAN_CONTRACT_ADDRESS =
   import.meta.env?.VITE_SOROBAN_CONTRACT_ADDRESS ||
   "CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS";
 
-// Initialize Horizon Server for Testnet
+// Initialize Horizon and Soroban Servers for Testnet
 export const horizonServer = new Horizon.Server(HORIZON_TESTNET_URL);
+export const sorobanServer = new rpc.Server(SOROBAN_RPC_URL);
 
 /**
  * Validates whether a given string is a valid Stellar public key (Ed25519).
@@ -194,7 +202,7 @@ export async function sendXlmPayment({
     );
   }
 
-  let baseFee = Horizon.BASE_FEE;
+  let baseFee = BASE_FEE || 100;
   try {
     baseFee = await horizonServer.fetchBaseFee();
   } catch (e) {
@@ -278,3 +286,180 @@ export async function sendXlmPayment({
     throw errObj;
   }
 }
+
+/**
+ * Fetches the total payment request count directly from the Soroban Smart Contract on Testnet.
+ * @returns {Promise<number>}
+ */
+export async function fetchSorobanRequestCount() {
+  try {
+    const dummyKp = Keypair.random();
+    const contract = new Contract(SOROBAN_CONTRACT_ADDRESS);
+    const source = {
+      accountId: () => dummyKp.publicKey(),
+      sequenceNumber: () => "1",
+      incrementSequenceNumber: () => {},
+    };
+
+    const tx = new TransactionBuilder(source, {
+      fee: "100",
+      networkPassphrase: Networks.TESTNET,
+    })
+      .addOperation(contract.call("get_request_count"))
+      .setTimeout(30)
+      .build();
+
+    const sim = await sorobanServer.simulateTransaction(tx);
+    if (sim.result) {
+      const count = scValToNative(sim.result.retval);
+      return Number(count);
+    }
+    return 0;
+  } catch (err) {
+    console.warn("Could not fetch Soroban request count:", err);
+    return 0;
+  }
+}
+
+/**
+ * Invokes create_request on the deployed Soroban smart contract.
+ */
+export async function createSorobanPaymentRequest({
+  studentAddress,
+  sponsorAddress,
+  amount,
+  purpose,
+  message,
+  signWithFreighter,
+}) {
+  const cleanStudent = studentAddress ? studentAddress.trim() : "";
+  const cleanSponsor = sponsorAddress ? sponsorAddress.trim() : cleanStudent;
+  const numAmount = Math.round(parseFloat(amount));
+
+  if (!isValidStellarAddress(cleanStudent)) {
+    throw new Error("Student wallet address is invalid.");
+  }
+  if (!isValidStellarAddress(cleanSponsor)) {
+    throw new Error("Sponsor wallet address is invalid.");
+  }
+
+  const studentAccount = await sorobanServer.getAccount(cleanStudent);
+  const contract = new Contract(SOROBAN_CONTRACT_ADDRESS);
+
+  const callOp = contract.call(
+    "create_request",
+    new Address(cleanStudent).toScVal(),
+    new Address(cleanSponsor).toScVal(),
+    nativeToScVal(BigInt(numAmount > 0 ? numAmount : 1), { type: "u64" }),
+    nativeToScVal(purpose ? purpose.substring(0, 32) : "Tuition"),
+    nativeToScVal(message ? message.substring(0, 64) : "Student Request")
+  );
+
+  const tx = new TransactionBuilder(studentAccount, {
+    fee: "10000",
+    networkPassphrase: Networks.TESTNET,
+  })
+    .addOperation(callOp)
+    .setTimeout(60)
+    .build();
+
+  const sim = await sorobanServer.simulateTransaction(tx);
+  if (!rpc.Api.isSimulationSuccess(sim)) {
+    throw new Error(`Soroban simulation failed: ${sim.error || "Execution trapped"}`);
+  }
+
+  const preparedTx = rpc.assembleTransaction(tx, sim).build();
+  const unsignedXdr = preparedTx.toXDR();
+  const signedXdr = await signWithFreighter(unsignedXdr, cleanStudent);
+
+  const signedTx = TransactionBuilder.fromXDR(signedXdr, Networks.TESTNET);
+  const sendRes = await sorobanServer.sendTransaction(signedTx);
+
+  if (sendRes.status === "ERROR") {
+    throw new Error(`Soroban RPC submission error: ${JSON.stringify(sendRes.errorResult || sendRes)}`);
+  }
+
+  let finalRes = await sorobanServer.getTransaction(sendRes.hash);
+  let attempts = 0;
+  while (finalRes.status === "NOT_FOUND" && attempts < 20) {
+    await new Promise((r) => setTimeout(r, 1000));
+    finalRes = await sorobanServer.getTransaction(sendRes.hash);
+    attempts++;
+  }
+
+  let requestIdOnChain = null;
+  if (finalRes.status === "SUCCESS" && finalRes.returnValue) {
+    requestIdOnChain = scValToNative(finalRes.returnValue)?.toString();
+  }
+
+  return {
+    hash: sendRes.hash,
+    status: finalRes.status || "SUCCESS",
+    requestId: requestIdOnChain,
+    successful: true,
+  };
+}
+
+/**
+ * Invokes pay_request on the deployed Soroban smart contract.
+ */
+export async function paySorobanPaymentRequest({
+  sponsorAddress,
+  requestId,
+  signWithFreighter,
+}) {
+  const cleanSponsor = sponsorAddress ? sponsorAddress.trim() : "";
+  if (!isValidStellarAddress(cleanSponsor)) {
+    throw new Error("Sponsor wallet address is invalid.");
+  }
+
+  const numericReqId = typeof requestId === "number" ? requestId : parseInt(requestId.replace(/\D/g, "") || "1", 10);
+
+  const sponsorAccount = await sorobanServer.getAccount(cleanSponsor);
+  const contract = new Contract(SOROBAN_CONTRACT_ADDRESS);
+
+  const callOp = contract.call(
+    "pay_request",
+    new Address(cleanSponsor).toScVal(),
+    nativeToScVal(BigInt(numericReqId > 0 ? numericReqId : 1), { type: "u64" })
+  );
+
+  const tx = new TransactionBuilder(sponsorAccount, {
+    fee: "10000",
+    networkPassphrase: Networks.TESTNET,
+  })
+    .addOperation(callOp)
+    .setTimeout(60)
+    .build();
+
+  const sim = await sorobanServer.simulateTransaction(tx);
+  if (!rpc.Api.isSimulationSuccess(sim)) {
+    throw new Error(`Soroban simulation failed: ${sim.error || "Execution trapped"}`);
+  }
+
+  const preparedTx = rpc.assembleTransaction(tx, sim).build();
+  const unsignedXdr = preparedTx.toXDR();
+  const signedXdr = await signWithFreighter(unsignedXdr, cleanSponsor);
+
+  const signedTx = TransactionBuilder.fromXDR(signedXdr, Networks.TESTNET);
+  const sendRes = await sorobanServer.sendTransaction(signedTx);
+
+  if (sendRes.status === "ERROR") {
+    throw new Error(`Soroban RPC submission error: ${JSON.stringify(sendRes.errorResult || sendRes)}`);
+  }
+
+  let finalRes = await sorobanServer.getTransaction(sendRes.hash);
+  let attempts = 0;
+  while (finalRes.status === "NOT_FOUND" && attempts < 20) {
+    await new Promise((r) => setTimeout(r, 1000));
+    finalRes = await sorobanServer.getTransaction(sendRes.hash);
+    attempts++;
+  }
+
+  return {
+    hash: sendRes.hash,
+    status: finalRes.status || "SUCCESS",
+    successful: true,
+  };
+}
+
