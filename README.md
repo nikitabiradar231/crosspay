@@ -2,9 +2,9 @@
 
 A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub designed to help international students receive cross-border tuition, accommodation, and living payments from parents, sponsors, or foundations worldwide with 3-second settlement and near-zero fees.
 
-🚀 **Live Deployment**: [https://simple-payment-dapp-woad.vercel.app](https://simple-payment-dapp-woad.vercel.app/)  
+🚀 **Live Vercel Deployment**: [https://simple-payment-dapp-woad.vercel.app](https://simple-payment-dapp-woad.vercel.app/)  
 📜 **Soroban Smart Contract**: `CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`  
-🌐 **Network**: Stellar Testnet (`https://horizon-testnet.stellar.org`)
+🌐 **Network**: Stellar Testnet (`https://horizon-testnet.stellar.org` & `https://soroban-testnet.stellar.org`)
 
 ---
 
@@ -55,11 +55,11 @@ graph TD
     D -->|Student| E[Student Dashboard]
     D -->|Sponsor| F[Sponsor Dashboard]
     E --> G[Create Payment Request: Amount, Purpose, Note]
-    G --> H[Request Saved & Synced to Inbox]
+    G --> H[Request Saved & Synced to Soroban Contract & Inbox]
     F --> I[Review Student Requests Inbox]
     I --> J[Click Pay Request & Review Fee Breakdown]
     J --> K[Approve Transaction in Freighter Popup]
-    K --> L[Stellar Testnet Horizon Submission]
+    K --> L[Stellar Testnet / Soroban RPC Submission]
     L --> M[Instant Balance Update & Explorer Hash Link]
 ```
 
@@ -68,7 +68,7 @@ graph TD
 ## 🛠️ Technology Stack
 
 - **Frontend Framework**: React 19 + Vite 8
-- **Stellar SDK**: `@stellar/stellar-sdk` v13+
+- **Stellar SDK**: `@stellar/stellar-sdk` v13.4.0 (Protocol 22 XDR support)
 - **Wallet Integration**: `@stellar/freighter-api` v2+
 - **Smart Contract**: Soroban Rust SDK (`soroban-sdk` v21.7.7)
 - **Styling**: Vanilla CSS (Cosmic Dark Glassmorphism Design System)
@@ -97,7 +97,7 @@ pub fn get_request_count(env: Env) -> u64;
 - **WASM Hash**: `2aa8d1c7cd8749263090e1ef4be12ef560f7af471eab9eb47c0fdb54f5ce68e8`
 - **WASM Upload Transaction Hash**: [`9c5d257ddacbd38e24eb3dca370f7c78e3cfeb8cb0ecc6ec828589fa05c8293b`](https://stellar.expert/explorer/testnet/tx/9c5d257ddacbd38e24eb3dca370f7c78e3cfeb8cb0ecc6ec828589fa05c8293b)
 - **Contract Deployment Transaction Hash**: [`71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4`](https://stellar.expert/explorer/testnet/tx/71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4)
-- **Real Testnet Invocation (`create_request`) Transaction Hash**: [`bde8d9b663be35a2c826e790949aae3bbabc13089866d68cbd36af8d46ac1bed`](https://stellar.expert/explorer/testnet/tx/bde8d9b663be35a2c826e790949aae3bbabc13089866d68cbd36af8d46ac1bed)
+- **Verified Testnet `create_request` Invocation**: [`5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305`](https://stellar.expert/explorer/testnet/tx/5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305)
 - **Cargo Build & Test**: `cd contracts/student_payment && cargo test`
 
 ---
@@ -240,12 +240,14 @@ The repository includes a GitHub Actions workflow `.github/workflows/ci.yml` tha
 
 ---
 
-## 👥 Real User Evidence & Submission Placeholders
+## 📋 Manual Submission Checklist
 
-- **10 Real User Evidence**: [ADD REAL 10 USER EVIDENCE]
-- **Real User Feedback Summary**: [ADD REAL FEEDBACK SUMMARY]
-- **Demo Video Link**: [ADD REAL DEMO VIDEO LINK]
-- **Final Screenshots**: [ADD REAL SCREENSHOTS]
+- [x] **Live Vercel Link**: [https://simple-payment-dapp-woad.vercel.app](https://simple-payment-dapp-woad.vercel.app/)
+- [x] **Public GitHub Repo**: [https://github.com/nikitabiradar231/crosspay](https://github.com/nikitabiradar231/crosspay)
+- [x] **Soroban Contract Address**: `CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`
+- [ ] **10 Real User Hashes**: *(To be inserted after collecting user transactions)*
+- [ ] **User Feedback Summary**: *(To be inserted after collecting feedback via in-app form)*
+- [ ] **Demo Video Link**: *(To be inserted after recording walkthrough video)*
 
 ---
 
