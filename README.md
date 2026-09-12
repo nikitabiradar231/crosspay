@@ -2,9 +2,19 @@
 
 A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub designed to help international students receive cross-border tuition, accommodation, and living payments from parents, sponsors, or foundations worldwide with 3-second settlement and near-zero fees.
 
-🚀 **Live Vercel Deployment**: [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/)  
-📜 **Soroban Smart Contract**: `CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`  
-🌐 **Network**: Stellar Testnet (`https://horizon-testnet.stellar.org` & `https://soroban-testnet.stellar.org`)
+---
+
+### 🟢 Level 4 Green Belt Quick Reference
+
+| Resource | Value / Direct Link |
+| :--- | :--- |
+| 🚀 **Live Production App** | [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/) |
+| 📦 **Public GitHub Repository** | [https://github.com/nikitabiradar231/crosspay](https://github.com/nikitabiradar231/crosspay) |
+| 📜 **Soroban Smart Contract ID** | [`CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`](https://stellar.expert/explorer/testnet/contract/CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS) |
+| 🌐 **Stellar Network** | Stellar Testnet (`https://horizon-testnet.stellar.org` & `https://soroban-testnet.stellar.org`) |
+| 🔑 **WASM Hash** | `2aa8d1c7cd8749263090e1ef4be12ef560f7af471eab9eb47c0fdb54f5ce68e8` |
+| 📝 **Deployment Tx Hash** | [`71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4`](https://stellar.expert/explorer/testnet/tx/71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4) |
+| ⚡ **Verified Testnet Invocation Tx** | [`5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305`](https://stellar.expert/explorer/testnet/tx/5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305) |
 
 ---
 
