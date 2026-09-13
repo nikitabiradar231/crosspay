@@ -9,7 +9,7 @@ A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub d
 | Resource | Value / Direct Link |
 | :--- | :--- |
 | 🚀 **Live Production App** | [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/) |
-| 📦 **Public GitHub Repository** | [https://github.com/nikitabiradar231/crosspaynow](https://github.com/nikitabiradar231/crosspaynow) |
+| 📦 **Public GitHub Repository** | [https://github.com/nikitabiradar231/crosspay](https://github.com/nikitabiradar231/crosspay) |
 | 📜 **Soroban Smart Contract ID** | [`CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`](https://stellar.expert/explorer/testnet/contract/CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS) |
 | 🌐 **Stellar Network** | Stellar Testnet (`https://horizon-testnet.stellar.org` & `https://soroban-testnet.stellar.org`) |
 | 🔑 **WASM Hash** | `2aa8d1c7cd8749263090e1ef4be12ef560f7af471eab9eb47c0fdb54f5ce68e8` |
@@ -345,7 +345,7 @@ Based on user feedback collected during testing, key suggestions include:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/nikitabiradar231/crosspaynow.git
+   git clone https://github.com/nikitabiradar231/crosspay.git
    cd crosspay
    ```
 2. **Install dependencies**:
@@ -389,7 +389,7 @@ The repository includes a GitHub Actions workflow `.github/workflows/ci.yml` tha
 ### Primary Level 4 Links & References
 
 - **Live Application**: [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/)
-- **GitHub Repository**: [https://github.com/nikitabiradar231/crosspaynow](https://github.com/nikitabiradar231/crosspaynow)
+- **GitHub Repository**: [https://github.com/nikitabiradar231/crosspay](https://github.com/nikitabiradar231/crosspay)
 - **Stellar Testnet Contract**: [`CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`](https://stellar.expert/explorer/testnet/contract/CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS)
 - **Demo Video**: [Watch the CrossPay Level 4 Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk)
 - **Testing Evidence Sheet**: [View CrossPay User Testing & Feedback Sheet](https://docs.google.com/spreadsheets/d/1GzjBamXNxRpWH3d53K95bBHPwmWxx6hEdWtAcCuIyBc/edit?resourcekey=&gid=1275744553#gid=1275744553)
