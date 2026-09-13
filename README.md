@@ -9,64 +9,65 @@ A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub d
 | Resource | Value / Direct Link |
 | :--- | :--- |
 | 🚀 **Live Production App** | [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/) |
-| 📦 **Public GitHub Repository** | [https://github.com/nikitabiradar231/crosspay](https://github.com/nikitabiradar231/crosspay) |
+| 📦 **Public GitHub Repository** | [https://github.com/nikitabiradar231/crosspaynow](https://github.com/nikitabiradar231/crosspaynow) |
 | 📜 **Soroban Smart Contract ID** | [`CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`](https://stellar.expert/explorer/testnet/contract/CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS) |
 | 🌐 **Stellar Network** | Stellar Testnet (`https://horizon-testnet.stellar.org` & `https://soroban-testnet.stellar.org`) |
 | 🔑 **WASM Hash** | `2aa8d1c7cd8749263090e1ef4be12ef560f7af471eab9eb47c0fdb54f5ce68e8` |
 | 📝 **Deployment Tx Hash** | [`71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4`](https://stellar.expert/explorer/testnet/tx/71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4) |
 | ⚡ **Verified Testnet Invocation Tx** | [`5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305`](https://stellar.expert/explorer/testnet/tx/5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305) |
 | 💸 **Verified 500 XLM Payment Tx** | [`73adad6796303c23aed345b27253f7df0c71c8a6aac4793fe3adace6cabbc951`](https://stellar.expert/explorer/testnet/tx/73adad6796303c23aed345b27253f7df0c71c8a6aac4793fe3adace6cabbc951) |
-| 🎥 **Demo Video Link** | [Google Drive Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk) |
+| 🎥 **Demo Video Link** | [Watch the CrossPay Level 4 Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk) |
+| 📊 **Testing Evidence Sheet** | [View CrossPay User Testing & Feedback Sheet](https://docs.google.com/spreadsheets/d/1GzjBamXNxRpWH3d53K95bBHPwmWxx6hEdWtAcCuIyBc/edit?resourcekey=&gid=1275744553#gid=1275744553) |
 
 ---
 
-## 🎥 Demo Video
+## 🎥 Level 4 Demo
 
 Watch a complete end-to-end video demonstration of the Cross-Border Student Payment Hub showing student payment requests, sponsor payments, real-time exchange rates, and Soroban smart contract interaction:
 
-👉 **[Watch Demo Video on Google Drive](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk)**
+👉 **[Watch the CrossPay Level 4 Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk)**
 
 ---
 
-## 📸 Application Screenshots
+## 📸 Product Screenshots
 
-### 1. Freighter Wallet Connection
+### 1. Main Product UI & Freighter Wallet Connection
 Connect securely on Stellar Testnet via the Freighter Wallet extension without exposing private keys.
 
 ![Freighter Wallet Connection](docs/screenshots/01-freighter-wallet-connect.png)
 
-### 2. Student Dashboard
-View live XLM wallet balance, total funds received, active payment requests, and initiate new payment requests tagged by purpose.
+### 2. Student Dashboard & Payment Request System
+View live XLM wallet balance, total funds received, active payment requests, and initiate new purpose-tagged payment requests.
 
-![Student Dashboard](docs/screenshots/02-student-dashboard.png)
+![Student Dashboard & Payment Request](docs/screenshots/02-student-dashboard.png)
 
-### 3. Sponsor Dashboard
+### 3. Sponsor Dashboard & Linked Student Inbox
 Browse incoming student payment requests, monitor total sent metrics, and execute instant payouts with one click.
 
 ![Sponsor Dashboard](docs/screenshots/03-sponsor-dashboard.png)
 
-### 4. Pre-Flight Transaction & Cost Breakdown
+### 4. Payment Flow & Pre-Flight Cost Breakdown
 Review full payment transparency including real-time XLM to USD/INR conversion rates and minimal Stellar network base fee (0.00001 XLM).
 
-![Pre-Flight Transaction Details](docs/screenshots/04-transaction-preflight-cost.png)
+![Payment Flow & Pre-Flight Breakdown](docs/screenshots/04-transaction-preflight-cost.png)
 
-### 5. Transaction History & On-Chain Explorer
+### 5. Transaction History & Explorer Integration
 Track all completed payments with direct links to Stellar Expert Explorer verification.
 
 ![Transaction History](docs/screenshots/05-transaction-history.png)
 
-### 6. Transaction Success Confirmation
+### 6. Successful Transaction Confirmation
 Immediate real-time payment confirmation modal displaying recipient address, Stellar ledger number (`#4651815`), transaction hash (`73adad67...`), and direct link to Stellar Expert Explorer.
 
-![Transaction Success Confirmation](docs/screenshots/06-transaction-success-confirmation.png)
+![Successful Transaction Confirmation](docs/screenshots/06-transaction-success-confirmation.png)
 
 ### 7. Stellar Expert Explorer Verification
 Verified on-chain transaction execution details on Stellar Testnet Explorer confirming `Status: Successful`, `Max Fee: 0.00001 XLM`, and `Fee Charged: 0.00001 XLM`.
 
 ![Stellar Expert Verification](docs/screenshots/07-stellar-expert-verification.png)
 
-### 8. Mobile Responsive Layout
-Fully responsive mobile interface ensuring flawless user experience on mobile devices for both international students and sponsors on the go.
+### 8. Mobile Responsive UI
+Fully responsive mobile interface (375x634) ensuring flawless user experience on mobile devices for both international students and sponsors on the go.
 
 ![Mobile Responsive View](docs/screenshots/08-mobile-responsive-view.png)
 
@@ -208,23 +209,26 @@ The Sponsor Dashboard provides:
 
 ---
 
-## 📈 Analytics & Product Telemetry
+## 📊 Analytics & Monitoring
 
-The application tracks privacy-compliant product telemetry stored locally and viewable via the top navigation bar:
-- `page_visit`
-- `wallet_connected` / `wallet_disconnected`
-- `onboarding_completed`
-- `payment_request_created`
-- `payment_initiated`
-- `payment_successful`
-- `payment_failed`
-- `feedback_submitted`
+CrossPay includes an in-app product telemetry and system health monitoring system (`src/services/analytics.js` & `src/services/monitoring.js`) without relying on external third-party tracking services:
 
----
+### 1. Product Telemetry & Event Tracking
+Application events are captured with timestamped payloads and stored locally in browser storage (`stellar_student_analytics_events`). Users can inspect real-time events via the in-app Telemetry Modal in the top navigation bar.
 
-## 🛡️ Monitoring & Error Tracking
+Tracked events include:
+- `page_visit`: Tracks landing page and route visits.
+- `wallet_connected`: Logged when a user connects Freighter wallet.
+- `wallet_disconnected`: Logged when a user disconnects their wallet.
+- `onboarding_completed`: Captured when a user completes Student/Sponsor profile setup.
+- `payment_request_created`: Logged when a student creates a payment request.
+- `payment_initiated`: Logged when a sponsor triggers the payment confirmation flow.
+- `payment_successful`: Logged when Stellar Horizon RPC confirms transaction submission.
+- `payment_failed`: Captured if wallet signature is rejected or RPC transaction fails.
+- `feedback_submitted`: Logged when a user submits an in-app rating or feedback response.
 
-The in-app monitoring engine records runtime exceptions, RPC submission failures, and wallet rejections, making debugging transparent and user-friendly.
+### 2. Error Tracking & System Health Monitoring
+The system health logger (`logAppError`) captures runtime exceptions, Horizon RPC failures, and wallet rejections into local storage logs (`stellar_student_error_logs`), dispatching custom `app_error_logged` window events for real-time UI error handling and debugging.
 
 ---
 
@@ -270,9 +274,10 @@ CrossPay was tested with 14 real users during the Level 4 product validation pha
 | Metric | Result |
 |---|---:|
 | Real users tested | 14 |
-| Stellar wallet connections | 14/14 |
+| Wallet connections | 14/14 |
 | Successful transactions/interactions | 13/14 |
-| User feedback responses | 14 |
+| Recorded transaction hashes | 10 |
+| Feedback responses | 14 |
 | Average usability rating | 4.43/5 |
 | Users rating 4/5 or higher | 14/14 |
 
@@ -281,26 +286,26 @@ CrossPay was tested with 14 real users during the Level 4 product validation pha
 All 14 users connected their Stellar wallet to CrossPay.
 13 out of 14 users successfully completed a transaction or interaction.
 
-| User | Role | Wallet Connected | Transaction/Interaction | Usability Rating |
+| User | Role | Wallet Connected | Interaction Status | Usability Rating |
 |---|---|---|---|---:|
 | User 01 | Sponsor / Parent | ✅ Yes | ✅ Successful | 5/5 |
 | User 02 | Sponsor / Parent | ✅ Yes | ✅ Successful | 4/5 |
 | User 03 | Student | ✅ Yes | ✅ Successful | 4/5 |
 | User 04 | Student | ✅ Yes | ✅ Successful | 4/5 |
-| User 05 | Student | ✅ Yes | ⚠️ No transaction hash recorded | 5/5 |
+| User 05 | Student | ✅ Yes | ✅ Successful interaction – hash not recorded | 5/5 |
 | User 06 | Sponsor / Parent | ✅ Yes | ✅ Successful | 4/5 |
-| User 07 | Student | ✅ Yes | ⚠️ No transaction hash recorded | 4/5 |
+| User 07 | Student | ✅ Yes | ✅ Successful interaction – hash not recorded | 4/5 |
 | User 08 | Sponsor / Parent | ✅ Yes | ✅ Successful | 4/5 |
 | User 09 | Student | ✅ Yes | ❌ Not successful | 4/5 |
-| User 10 | Student | ✅ Yes | ⚠️ No transaction hash recorded | 5/5 |
+| User 10 | Student | ✅ Yes | ✅ Successful interaction – hash not recorded | 5/5 |
 | User 11 | Sponsor / Parent | ✅ Yes | ✅ Successful | 5/5 |
 | User 12 | Student | ✅ Yes | ✅ Successful | 4/5 |
 | User 13 | Sponsor / Parent | ✅ Yes | ✅ Successful | 5/5 |
 | User 14 | Sponsor / Parent | ✅ Yes | ✅ Successful | 5/5 |
 
-> Detailed wallet addresses, transaction hashes, timestamps, and individual feedback responses are maintained in the complete user-testing evidence sheet.
+> Detailed wallet addresses, transaction hashes, timestamps, and individual feedback responses are available in the user testing evidence sheet.
 
-👉 **[View Complete User Testing & Feedback Evidence](https://docs.google.com/spreadsheets/d/1GzjBamXNxRpWH3d53K95bBHPwmWxx6hEdWtAcCuIyBc/edit?gid=1275744553)**
+👉 **[View CrossPay User Testing & Feedback Sheet](https://docs.google.com/spreadsheets/d/1GzjBamXNxRpWH3d53K95bBHPwmWxx6hEdWtAcCuIyBc/edit?resourcekey=&gid=1275744553#gid=1275744553)**
 
 ---
 
@@ -312,21 +317,19 @@ Feedback was collected from all 14 users after testing CrossPay.
 
 | Feedback Metric | Result |
 |---|---:|
-| Total feedback responses | 14 |
+| Total responses | 14 |
 | Average usability rating | 4.43/5 |
-| Rating 5/5 | 6 users |
-| Rating 4/5 | 8 users |
-| Rating below 4/5 | 0 users |
-| Users rating CrossPay 4/5 or higher | 14/14 |
+| 5/5 ratings | 6 |
+| 4/5 ratings | 8 |
+| Ratings below 4/5 | 0 |
 
 ### Common Feedback
 
 Based on the collected responses, users described CrossPay as:
-- Easy to use
 - Easy wallet connection
 - Simple payment workflow
 - Good UI
-- Nice overall experience
+- Generally easy/nice experience
 
 ### Improvement Suggestions
 
@@ -342,7 +345,7 @@ Based on user feedback collected during testing, key suggestions include:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/nikitabiradar231/crosspay.git
+   git clone https://github.com/nikitabiradar231/crosspaynow.git
    cd crosspay
    ```
 2. **Install dependencies**:
@@ -381,25 +384,35 @@ The repository includes a GitHub Actions workflow `.github/workflows/ci.yml` tha
 
 ---
 
-## 📋 Manual Submission Checklist
+## 📋 Level 4 Submission Evidence & Verification
 
-- [x] **Live Vercel Link**: [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/)
-- [x] **Public GitHub Repo**: [https://github.com/nikitabiradar231/crosspay](https://github.com/nikitabiradar231/crosspay)
-- [x] **Soroban Contract Address**: `CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`
-- [x] **10+ Real User Wallet Interactions**: Tested with 14 real users (14/14 wallet connections, 13/14 successful transactions)
-- [x] **User Feedback Summary**: Collected 14 user responses (4.43/5 average usability rating)
-- [x] **Demo Video Link**: [Google Drive Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk)
+### Primary Level 4 Links & References
 
-### Level 4 Evidence Summary Table
+- **Live Application**: [https://crosspay-green.vercel.app](https://crosspay-green.vercel.app/)
+- **GitHub Repository**: [https://github.com/nikitabiradar231/crosspaynow](https://github.com/nikitabiradar231/crosspaynow)
+- **Stellar Testnet Contract**: [`CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`](https://stellar.expert/explorer/testnet/contract/CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS)
+- **Demo Video**: [Watch the CrossPay Level 4 Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk)
+- **Testing Evidence Sheet**: [View CrossPay User Testing & Feedback Sheet](https://docs.google.com/spreadsheets/d/1GzjBamXNxRpWH3d53K95bBHPwmWxx6hEdWtAcCuIyBc/edit?resourcekey=&gid=1275744553#gid=1275744553)
 
-| Level 4 Requirement | Evidence |
-|---|---|
-| 10+ real users onboarded | 14 real users |
-| Proof of wallet interactions | 14/14 wallet connections |
-| Successful transaction/interaction proof | 13/14 successful |
-| Basic user feedback collection | 14 responses |
-| User feedback summary | 4.43/5 average usability |
-| Detailed testing evidence | [Google Sheet Evidence](https://docs.google.com/spreadsheets/d/1GzjBamXNxRpWH3d53K95bBHPwmWxx6hEdWtAcCuIyBc/edit?gid=1275744553) |
+### Level 4 Requirements Verification Table
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| Production-ready MVP | ✅ Complete | Live application |
+| Mobile responsive UI | ✅ Complete | Mobile screenshot |
+| Loading/error handling | ✅ Complete | Application |
+| 10+ real users | ✅ Complete | 14 users |
+| Wallet interactions | ✅ Complete | 14 wallet connections / 10 recorded hashes |
+| User feedback | ✅ Complete | 14 responses |
+| Production deployment | ✅ Complete | Vercel |
+| Analytics | ✅ Complete | Analytics implementation |
+| Monitoring/error tracking | ✅ Complete | Existing implementation |
+| Stellar testnet contract | ✅ Complete | Contract address |
+| 15+ meaningful commits | ✅ Complete | Git history |
+| Public GitHub | ✅ Complete | Repository |
+| Demo video | ✅ Complete | Google Drive |
+| Product screenshots | ✅ Complete | docs/screenshots |
+| Feedback summary | ✅ Complete | README + testing sheet |
 
 ---
 
