@@ -15,6 +15,7 @@ A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub d
 | 🔑 **WASM Hash** | `2aa8d1c7cd8749263090e1ef4be12ef560f7af471eab9eb47c0fdb54f5ce68e8` |
 | 📝 **Deployment Tx Hash** | [`71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4`](https://stellar.expert/explorer/testnet/tx/71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4) |
 | ⚡ **Verified Testnet Invocation Tx** | [`5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305`](https://stellar.expert/explorer/testnet/tx/5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305) |
+| 🎥 **Demo Video Link** | [Google Drive Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk) |
 
 ---
 
@@ -257,7 +258,7 @@ The repository includes a GitHub Actions workflow `.github/workflows/ci.yml` tha
 - [x] **Soroban Contract Address**: `CADZ6GEZIF2JKWNT3OIIZMNINRTHY6EVHYJYT3CX6BRIKPYEUC2YH6OS`
 - [ ] **10 Real User Hashes**: *(To be inserted after collecting user transactions)*
 - [ ] **User Feedback Summary**: *(To be inserted after collecting feedback via in-app form)*
-- [ ] **Demo Video Link**: *(To be inserted after recording walkthrough video)*
+- [x] **Demo Video Link**: [Google Drive Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk)
 
 ---
 
