@@ -71,6 +71,11 @@ Fully responsive mobile interface (375x634) ensuring flawless user experience on
 
 ![Mobile Responsive View](docs/screenshots/08-mobile-responsive-view.png)
 
+### 9. Product Telemetry & System Error Monitoring
+Inspect live product event telemetry (wallet connection, payment initiation, onboarding, page visits) and system error logs captured in local browser storage (`stellar_student_analytics_events` & `stellar_student_error_logs`).
+
+![Product Telemetry & System Monitoring](docs/screenshots/09-analytics-monitoring.png)
+
 ---
 
 ## 📌 Problem Statement

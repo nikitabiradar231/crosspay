@@ -36,7 +36,7 @@ import {
 
 import { getXlmExchangeRates } from "./services/exchange";
 import { trackEvent } from "./services/analytics";
-import { logAppError } from "./services/monitoring";
+import { logAppError, initGlobalErrorMonitoring } from "./services/monitoring";
 
 export default function App() {
   // Navigation & View tab
@@ -78,6 +78,7 @@ export default function App() {
   // Mount logic: check freighter, load profile, exchange rates & requests
   useEffect(() => {
     async function init() {
+      initGlobalErrorMonitoring();
       trackEvent("page_visit", { page: "home" });
 
       const installed = await isFreighterAvailable();

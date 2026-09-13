@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { isValidStellarAddress } from "../services/stellar";
 import { convertXlmToFiat } from "../services/exchange";
 import { trackEvent, getAnalyticsEvents, clearAnalyticsEvents } from "../services/analytics";
+import { logAppError, getErrorLogs, clearErrorLogs } from "../services/monitoring";
 import { createPaymentRequest, getPaymentRequests } from "../services/contract";
 
 import { Keypair } from "@stellar/stellar-sdk";
@@ -9,6 +10,7 @@ import { Keypair } from "@stellar/stellar-sdk";
 describe("Stellar & Service Unit Tests", () => {
   beforeEach(() => {
     clearAnalyticsEvents();
+    clearErrorLogs();
   });
 
   it("validates valid and invalid Stellar public addresses", () => {
@@ -36,6 +38,15 @@ describe("Stellar & Service Unit Tests", () => {
     expect(events.length).toBeGreaterThan(0);
     expect(events[0].eventName).toBe("unit_test_event");
     expect(events[0].properties.testParam).toBe("value123");
+  });
+
+  it("logs system errors and retrieves error logs", () => {
+    logAppError(new Error("Test Exception"), "UnitTestContext");
+
+    const errors = getErrorLogs();
+    expect(errors.length).toBeGreaterThan(0);
+    expect(errors[0].message).toBe("Test Exception");
+    expect(errors[0].context).toBe("UnitTestContext");
   });
 
   it("creates and retrieves payment requests", () => {

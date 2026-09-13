@@ -46,3 +46,16 @@ export function clearErrorLogs() {
     localStorage.removeItem(ERROR_LOGS_KEY);
   } catch (e) {}
 }
+
+export function initGlobalErrorMonitoring() {
+  if (typeof window === "undefined") return;
+
+  window.addEventListener("error", (event) => {
+    logAppError(event.error || event.message || "Global Error", "GlobalRuntimeError");
+  });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    logAppError(event.reason || "Unhandled Promise Rejection", "UnhandledPromiseRejection");
+  });
+}
+
