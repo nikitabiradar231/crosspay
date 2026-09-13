@@ -51,10 +51,10 @@ Review full payment transparency including real-time XLM to USD/INR conversion r
 
 ![Payment Flow & Pre-Flight Breakdown](docs/screenshots/04-transaction-preflight-cost.png)
 
-### 5. Transaction History & Explorer Integration
-Track all completed payments with direct links to Stellar Expert Explorer verification.
+### 5. Transaction & Monitoring
+Track all completed payments with direct links to Stellar Expert Explorer verification and real-time transaction monitoring.
 
-![Transaction History](docs/screenshots/05-transaction-history.png)
+![Transaction & Monitoring](docs/screenshots/05-transaction-history.png)
 
 ### 6. Successful Transaction Confirmation
 Immediate real-time payment confirmation modal displaying recipient address, Stellar ledger number (`#4651815`), transaction hash (`73adad67...`), and direct link to Stellar Expert Explorer.
