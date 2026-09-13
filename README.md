@@ -15,7 +15,60 @@ A production-ready, high-performance Stellar dApp & Soroban Smart Contract hub d
 | 🔑 **WASM Hash** | `2aa8d1c7cd8749263090e1ef4be12ef560f7af471eab9eb47c0fdb54f5ce68e8` |
 | 📝 **Deployment Tx Hash** | [`71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4`](https://stellar.expert/explorer/testnet/tx/71785bebe2c98735bcf7471b613db14baedaba4b433781a698a765b8b14682e4) |
 | ⚡ **Verified Testnet Invocation Tx** | [`5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305`](https://stellar.expert/explorer/testnet/tx/5bc811a1f0c69e9d396ab9aac39ef698062c946370bcbcac06fafe80bb4f3305) |
+| 💸 **Verified 500 XLM Payment Tx** | [`73adad6796303c23aed345b27253f7df0c71c8a6aac4793fe3adace6cabbc951`](https://stellar.expert/explorer/testnet/tx/73adad6796303c23aed345b27253f7df0c71c8a6aac4793fe3adace6cabbc951) |
 | 🎥 **Demo Video Link** | [Google Drive Demo Video](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk) |
+
+---
+
+## 🎥 Demo Video
+
+Watch a complete end-to-end video demonstration of the Cross-Border Student Payment Hub showing student payment requests, sponsor payments, real-time exchange rates, and Soroban smart contract interaction:
+
+👉 **[Watch Demo Video on Google Drive](https://drive.google.com/file/d/1RFYZ7TeZ4akTCEefTyazi4W8lbCM9LAq/view?usp=drivesdk)**
+
+---
+
+## 📸 Application Screenshots
+
+### 1. Freighter Wallet Connection
+Connect securely on Stellar Testnet via the Freighter Wallet extension without exposing private keys.
+
+![Freighter Wallet Connection](docs/screenshots/01-freighter-wallet-connect.png)
+
+### 2. Student Dashboard
+View live XLM wallet balance, total funds received, active payment requests, and initiate new payment requests tagged by purpose.
+
+![Student Dashboard](docs/screenshots/02-student-dashboard.png)
+
+### 3. Sponsor Dashboard
+Browse incoming student payment requests, monitor total sent metrics, and execute instant payouts with one click.
+
+![Sponsor Dashboard](docs/screenshots/03-sponsor-dashboard.png)
+
+### 4. Pre-Flight Transaction & Cost Breakdown
+Review full payment transparency including real-time XLM to USD/INR conversion rates and minimal Stellar network base fee (0.00001 XLM).
+
+![Pre-Flight Transaction Details](docs/screenshots/04-transaction-preflight-cost.png)
+
+### 5. Transaction History & On-Chain Explorer
+Track all completed payments with direct links to Stellar Expert Explorer verification.
+
+![Transaction History](docs/screenshots/05-transaction-history.png)
+
+### 6. Transaction Success Confirmation
+Immediate real-time payment confirmation modal displaying recipient address, Stellar ledger number (`#4651815`), transaction hash (`73adad67...`), and direct link to Stellar Expert Explorer.
+
+![Transaction Success Confirmation](docs/screenshots/06-transaction-success-confirmation.png)
+
+### 7. Stellar Expert Explorer Verification
+Verified on-chain transaction execution details on Stellar Testnet Explorer confirming `Status: Successful`, `Max Fee: 0.00001 XLM`, and `Fee Charged: 0.00001 XLM`.
+
+![Stellar Expert Verification](docs/screenshots/07-stellar-expert-verification.png)
+
+### 8. Mobile Responsive Layout
+Fully responsive mobile interface ensuring flawless user experience on mobile devices for both international students and sponsors on the go.
+
+![Mobile Responsive View](docs/screenshots/08-mobile-responsive-view.png)
 
 ---
 
